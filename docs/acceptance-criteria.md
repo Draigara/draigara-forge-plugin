@@ -6,7 +6,7 @@
 - Init creates minimal `forge.yaml` only through MCP and never overwrites it.
 - Recommendations contain only current-query candidate IDs and cite current evidence.
 - Developer selection is always available, including none and cancel.
-- Apply occurs only after the APM plan is shown and freshly confirmed.
+- Apply occurs only after the complete top-level request is shown and freshly confirmed.
 - Prompt injection, stale tokens, plan mismatch, cancellation, and missing prerequisites fail closed.
 - Every claimed stable APM target passes its native install, interaction, MCP, status, and removal lane.
-- The packed release contains no local paths, bridge wrappers, CLI binary, secrets, or obsolete fixtures.
+- The packed release contains no local paths, wrapper executables, CLI binary, secrets, or obsolete fixtures.

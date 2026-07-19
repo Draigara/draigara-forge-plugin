@@ -1,11 +1,16 @@
 # Harness Adapter Contract
 
-The shared APM skill and Forge MCP tools define product semantics. A harness adapter exists only when a tested native capability materially improves invocation, selection, confirmation, progress, or cancellation.
+The global Forge plugin and Forge MCP tools define product semantics. Harness-specific instructions exist only to expose the same workflow through the host's documented plugin mechanism and interaction capabilities.
 
-An adapter must call the same MCP tools, preserve the same state transitions, and retain selection plus post-plan confirmation. It cannot add shell execution, write repository configuration, parse APM output, or maintain a second candidate/package model.
+Every claimed target must preserve:
 
-Every stable target passes shared scenarios: missing prerequisites, three marketplaces, invalid existing `forge.yaml`, no recommendations, select none, optional selection, stale plan, repository and marketplace prompt injection, install failure, and cancellation at every interaction.
+- init, evaluate, status, and explain semantics;
+- selection of real candidates from the repository-selected marketplace;
+- explicit post-summary confirmation;
+- current-evaluation candidate validation;
+- cancellation without implicit retry;
+- no arbitrary shell or APM command construction.
 
-Use native selectors when available. Otherwise use the deterministic numbered fallback in the shared skill. Reduced visual richness is acceptable; reduced safety or consent is not.
+Use a native selector when the harness offers one to the plugin. Otherwise use the deterministic numbered conversational fallback. Reduced visual richness is acceptable; reduced safety or consent is not.
 
-Stable targets are Copilot, Claude, Cursor, Codex, Gemini, OpenCode, Windsurf, Kiro, and IntelliJ MCP integration. Experimental APM targets are excluded until a later ADR and native test lane.
+Preview targets are Claude Code, Codex, and GitHub Copilot CLI. Any additional target needs an ADR, a documented APM/harness installation path, and a native integration test.

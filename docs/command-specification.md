@@ -39,7 +39,7 @@ Always:
 - retrieves current marketplace candidates;
 - shows selectable recommendations;
 - permits installing none;
-- shows a final APM plan;
+- shows the final top-level package, marketplace, repository, and target request;
 - confirms before installation.
 
 It does not only report recommendations. It is an interactive recommendation and selection workflow.

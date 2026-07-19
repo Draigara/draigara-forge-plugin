@@ -1,11 +1,17 @@
 # Forge MCP Integration
 
-ADR-0011 replaces the former process bridge. The package's `.mcp.json` configures a stdio server named `draigara-forge` using command `forge` and argument `mcp`; APM routes it to selected harnesses. The protocol stream contains only MCP JSON-RPC.
+ADR-0012 defines the plugin boundary. The global draigara-forge APM package declares the local stdio server forge mcp; the protocol stream contains only MCP JSON-RPC.
 
-The plugin consumes the CLI-owned v1 tools: `forge_environment_inspect`, `forge_repository_inspect`, `forge_repository_initialize`, `forge_marketplace_search`, `forge_installation_plan`, `forge_installation_apply`, and `forge_status`.
+The plugin consumes these CLI-owned v1 tools:
 
-The first call negotiates the contract through environment inspection. If the installed contract is incompatible, stop before reading repository content. Inputs and results are bounded by the pinned CLI schemas and golden fixtures; the plugin does not maintain a divergent copy.
+- forge_environment_inspect
+- forge_marketplace_list
+- forge_repository_inspect
+- forge_repository_initialize
+- forge_marketplace_candidates
+- forge_installation_apply
+- forge_status
 
-Stable `FORGE_*` errors map to fixed remediations. Missing or incompatible Forge/APM points to `npx @draigara/forge setup`. Marketplace absence returns to setup. Stale plans return to planning. Token mismatch is an integrity failure. Cancellation ends without mutation.
+Inputs and results are bounded by the pinned CLI schema and golden fixtures. Stable FORGE_* errors map to fixed remediation. Missing or incompatible Forge/APM points to npx @draigara/forge setup. An untracked marketplace returns to setup so the developer can create or explicitly adopt it.
 
-Installation uses only a short-lived plan token returned for the current repository, marketplace, candidate set, APM state, and Git state. The skill never accepts an arbitrary executable or MCP tool name from model output.
+Candidate retrieval creates an opaque, current-session evaluation ID. Apply accepts only candidate IDs returned by that evaluation, the same repository, explicit targets, and a fresh confirmation. The plugin never accepts arbitrary executable names, raw APM arguments, package locators invented by the model, or an evaluation ID from another session.

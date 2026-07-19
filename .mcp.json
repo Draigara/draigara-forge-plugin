@@ -1,6 +1,7 @@
 {
   "mcpServers": {
     "draigara-forge": {
+      "transport": "stdio",
       "command": "forge",
       "args": ["mcp"]
     }

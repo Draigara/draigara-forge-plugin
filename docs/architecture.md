@@ -1,23 +1,21 @@
 # Plugin Architecture
 
-The plugin is one APM-native package. Its portable core is `.apm/skills/forge/SKILL.md` plus the plugin-native `.mcp.json`; APM packs and deploys the skill and `forge mcp` server configuration to each selected stable target.
+Forge is one globally installed APM plugin bundle, similar in installation shape to Superpowers. Its portable core is .apm/skills/forge/SKILL.md; its MCP declaration starts the separately installed forge mcp executable. APM deploys the bundle to each selected supported harness.
 
-```text
-Harness-native invocation and selection
-              │
-              ▼
-Shared /forge skill
-  init | evaluate | status | explain
-              │
-              ▼
-Forge MCP v1 tools
-              │
-              ▼
-Forge CLI deterministic services → Microsoft APM
-```
+    Harness-native invocation and selection
+                  |
+                  v
+    Global Forge plugin bundle
+      init | evaluate | status | explain
+                  |
+                  v
+    Forge MCP v1 tools
+                  |
+                  v
+    Forge CLI deterministic services -> Microsoft APM
 
-The skill owns conversational reasoning, evidence-linked recommendations, and developer interaction. The CLI owns repository inspection, `forge.yaml`, marketplace state, APM plans, plan tokens, and mutations. APM owns targets, package state, dependency resolution, security policy, and deployment.
+The plugin owns conversational reasoning, evidence-linked recommendations, and developer interaction. The CLI owns setup, deterministic repository inspection, forge.yaml, marketplace provenance, current-session evaluations, and safe APM invocation. APM owns package state, dependency resolution, lock state, security policy, and deployment.
 
-Evaluation state is session-scoped. Evidence, inference, candidates, recommendations, selection, and the APM plan remain distinct. Repository and marketplace text is untrusted and cannot change tool permissions or approval rules.
+Repository and marketplace content is untrusted data. Evaluation state is session-scoped. Evidence, inference, candidates, recommendations, selection, and mutation remain distinct. Harness-specific instructions may improve invocation or selectors but cannot duplicate the workflow or bypass MCP.
 
-Harness adapters may improve selectors or aliases but cannot duplicate the workflow or bypass MCP. Support is claimed only after target-native installation and behavior tests.
+Preview support is limited to Claude Code, Codex, and GitHub Copilot CLI. Additional harnesses require a documented install path and native integration lane.

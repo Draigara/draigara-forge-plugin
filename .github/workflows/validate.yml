@@ -17,8 +17,7 @@ jobs:
       - name: Reject superseded active artifacts
         shell: pwsh
         run: ./tools/Validate-Repository.ps1
-      - name: Validate APM package and MCP plan
-        run: |
-          uvx --from apm-cli==0.26.0 apm install --dry-run --target copilot,claude,cursor,codex,gemini,opencode,windsurf,kiro,intellij
+      - name: Validate intentional portable payload
+        run: uvx --from apm-cli==0.26.0 apm pack --dry-run --verbose
       - name: Pack portable plugin
-        run: uvx --from apm-cli==0.26.0 apm pack -o "${RUNNER_TEMP}/forge-plugin"
+        run: uvx --from apm-cli==0.26.0 apm pack --archive -o "${RUNNER_TEMP}/forge-plugin"

@@ -7,7 +7,7 @@
 
 ## Marketplace selection
 
-The plugin reads `forge.yaml` through the bridge and uses exactly its `marketplace.id`. It cannot switch marketplaces during evaluation without explicitly updating repository configuration through init/change workflow.
+The plugin reads `forge.yaml` through Forge MCP and uses exactly its `marketplace.id`. It cannot switch marketplaces during evaluation without explicitly updating repository configuration through an init/change workflow.
 
 No fallback to Draigara Open is allowed.
 
@@ -24,7 +24,7 @@ No fallback to Draigara Open is allowed.
 
 ## Package metadata
 
-Use only metadata surfaced through the official APM-compatible source and CLI bridge. Typical fields may include title, summary, tags, version, source, status, and opaque locator.
+Use only bounded metadata surfaced through the registered APM-compatible marketplace source and Forge MCP. Typical fields may include title, summary, tags, version, scope, kind, supported targets, and an opaque candidate ID.
 
 Do not scrape marketplace websites or clone package repositories merely to decide whether to recommend them.
 
@@ -37,7 +37,7 @@ This boundary is essential:
 ```text
 Plugin: "This top-level package appears relevant."
 APM: "Here is what installing it resolves and changes."
-Developer: "I approve or reject the exact plan."
+Developer: "I approve or reject this exact top-level request."
 ```
 
 ## Weak results

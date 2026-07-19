@@ -6,4 +6,4 @@ The package is published as `draigara-forge` and installed from Draigara OpenAPM
 
 Because the package contains a self-defined plugin-native stdio MCP server, installation must surface APM's executable-trust decision. Forge never bypasses an organisation deny or silently grants trust.
 
-A release must validate its allow-list, licence, provenance, MCP compatibility, APM 0.26.x compatibility, and every claimed stable target. It contains no Forge CLI binary and no process-bridge wrappers.
+A release must validate its allow-list, licence, provenance, MCP compatibility, APM 0.26.x compatibility, and every claimed preview target. It contains no Forge CLI binary or wrapper executable.

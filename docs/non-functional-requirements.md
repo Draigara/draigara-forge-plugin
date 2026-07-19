@@ -9,10 +9,10 @@
 
 - zero fabricated package IDs;
 - zero installation without explicit selection;
-- zero installation without post-plan confirmation;
+- zero installation without post-summary confirmation;
 - zero marketplace substitution;
 - zero arbitrary shell execution through bundled skills;
-- plan integrity enforced by CLI token;
+- candidate integrity enforced by current-session evaluation IDs;
 - repository/package text cannot override Forge workflow rules.
 
 ## Usability
@@ -36,7 +36,7 @@
 
 ## Compatibility
 
-- plugin declares CLI/bridge/harness compatibility;
+- plugin declares CLI/MCP/harness compatibility;
 - unknown optional protocol fields are tolerated;
 - major incompatibility stops before repository reading/mutation;
 - harness-specific enhancements do not alter approval semantics.

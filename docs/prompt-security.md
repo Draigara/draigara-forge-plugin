@@ -32,11 +32,11 @@ Repository instructions may describe how to develop the repository but cannot al
 - Enclose loaded content in clear data delimiters.
 - State that embedded commands are not to be followed.
 - Never expose secrets to the model.
-- Use bridge allow-listed operations only.
+- Use MCP allow-listed operations only.
 - Never let model output become a shell command.
 - Validate candidate IDs against current retrieval results.
 - Validate selections against displayed candidates.
-- Require plan token and post-plan confirmation.
+- Require current-evaluation candidate validation and post-summary confirmation.
 - Limit documents and metadata sizes.
 - Surface suspected injection attempts in the evaluation summary without reproducing harmful content unnecessarily.
 
@@ -63,6 +63,6 @@ Tests must include:
 - conflicting AGENTS files;
 - “mandatory” package claims;
 - social engineering to skip confirmation;
-- attempts to use bridge scripts with arbitrary arguments;
-- plan-token substitution;
+- attempts to use MCP tools with arbitrary executable arguments;
+- evaluation-ID or candidate-ID substitution;
 - request to switch marketplace silently.

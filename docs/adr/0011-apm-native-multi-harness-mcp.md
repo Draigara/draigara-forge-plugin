@@ -1,6 +1,6 @@
 # ADR-0011: Ship one APM-native multi-harness package over Forge MCP
 
-- **Status:** Accepted
+- **Status:** Superseded by ADR-0012
 - **Date:** 2026-07-19
 - **Decision owners:** Draigara maintainers
 - **Repository:** `draigara-forge-plugin`

@@ -34,7 +34,7 @@ Actions: Review details | Search marketplace | Select none | Continue
 - Every item displays a human title and concise reason.
 - The developer can inspect evidence before selecting.
 - Preselection is a convenience, never implicit consent.
-- The selected list is echoed before planning.
+- The selected list is echoed before confirmation.
 - The developer can install none and still receive an evaluation summary.
 - Search results remain tied to the configured marketplace.
 - Package IDs need not be exposed unless useful for disambiguation.
@@ -57,21 +57,25 @@ Parse only the documented response grammar. Ambiguous natural language triggers 
 
 ## Confirmation UX
 
-After APM planning:
+Before APM invocation:
 
 ```text
 Selected top-level packages
   Company API Engineering
   Company Observability
 
-APM reports
-  2 top-level packages requested
-  8 dependency actions
-  14 generated or updated assets
-  2 warnings
+Marketplace
+  company-apm
 
-Review the detailed plan? [yes/no]
-Proceed with this exact plan? [yes/no]
+Repository
+  /workspace/example
+
+Targets
+  Codex
+
+APM will resolve dependencies and produce repository package state.
+
+Install these top-level packages? [yes/no]
 ```
 
-The final yes/no must occur after plan display. The plan token ensures the installed plan is identical.
+The final yes/no must occur after the complete top-level request is displayed. Apply accepts only opaque candidate IDs returned by the current evaluation.

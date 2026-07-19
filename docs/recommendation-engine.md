@@ -96,4 +96,4 @@ Every recommendation answers:
 4. Is it already installed?
 5. Was it recommended because of current implementation, documented direction, or user intent?
 
-Do not explain transitive contents unless those details appear in the APM plan, and clearly attribute them to APM.
+Do not predict or explain transitive contents. APM owns dependency resolution; only verified APM-owned state may be described after apply.
