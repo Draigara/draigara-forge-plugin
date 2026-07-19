@@ -1,0 +1,37 @@
+name: Release Plugin
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - shell: pwsh
+        run: ./tools/Validate-Repository.ps1
+      - run: uvx --from apm-cli==0.26.0 apm install --dry-run --target copilot,claude,cursor,codex,gemini,opencode,windsurf,kiro,intellij
+      - run: uvx --from apm-cli==0.26.0 apm pack --archive -o artifacts
+      - run: sha256sum artifacts/* > artifacts/SHA256SUMS
+      - uses: actions/upload-artifact@v7
+        with:
+          name: draigara-forge-plugin
+          path: artifacts/
+      - uses: softprops/action-gh-release@v3
+        if: ${{ github.event_name == 'push' || !inputs.dry_run }}
+        with:
+          files: artifacts/*
+          generate_release_notes: true

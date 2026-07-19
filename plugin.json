@@ -1,0 +1,12 @@
+{
+  "name": "draigara-forge",
+  "version": "0.1.0",
+  "description": "Repository-aware discovery and selection of APM marketplace packages through Draigara Forge.",
+  "author": {
+    "name": "Draigara"
+  },
+  "repository": "https://github.com/draigara/draigara-forge-plugin",
+  "homepage": "https://github.com/draigara/draigara-forge-plugin",
+  "license": "MIT",
+  "keywords": ["apm", "agent-skills", "developer-tools"]
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "draigara-forge": {
+      "command": "forge",
+      "args": ["mcp"]
+    }
+  }
+}
