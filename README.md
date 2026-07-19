@@ -1,33 +1,72 @@
-# Draigara Forge Plugin
+<p align="center">
+  <img src="./docs/assets/draigara-wordmark.svg" alt="Draigara" width="480">
+</p>
 
-The Forge plugin is a globally installed plugin bundle for repository-aware discovery and installation of Microsoft APM packages. Like other agent plugins, it combines a conversational skill with a deterministic MCP integration; it is not installed or maintained as an isolated skill.
+# Forge Plugin
+
+The Forge plugin provides repository-aware discovery and installation of
+Microsoft APM packages inside supported AI coding tools. It is one globally
+installed plugin bundle containing a conversational skill and the deterministic
+Forge MCP integration—not a standalone skill that users assemble manually.
 
 ## Install
 
-Run the guided machine setup:
+The recommended route is Forge's guided machine setup:
 
 ```sh
-npx @draigara/forge setup
+npx @draigara/forge@next setup
 ```
 
-Forge detects Codex, Claude, and GitHub Copilot CLI, confirms the complete machine plan, and asks APM to install `draigara-forge@draigara-openapm` globally for the selected targets. Forge configures its Copilot MCP entry through the documented Copilot CLI only when APM cannot do so.
+The same command works from npm on Windows, macOS, and Linux with Node.js 22 or
+newer. pnpm and modern Yarn users can run:
+
+```sh
+pnpm dlx @draigara/forge@next setup
+# or
+yarn dlx @draigara/forge@next setup
+```
+
+Forge detects Codex CLI, Claude Code, and GitHub Copilot CLI, confirms the full
+machine plan, and asks APM to install `draigara-forge@draigara-openapm`
+globally for the selected targets.
+
+Advanced users who already configured Draigara OpenAPM Community can ask APM
+directly:
+
+```sh
+apm install draigara-forge@draigara-openapm --global --target claude,codex,copilot --trust-transitive-mcp
+```
+
+APM owns plugin installation and target deployment. Forge uses the documented
+Copilot CLI only to reconcile its own MCP entry when APM cannot configure that
+global entry.
 
 ## Use in a repository
 
-- Claude or Copilot: `/forge init`
-- Codex: `$forge init` or select Forge from `/skills`
-- All supported harnesses: ask Forge to initialize the repository in natural language
+- Claude Code or GitHub Copilot CLI: `/forge init`
+- Codex CLI: `$forge init` or select Forge from `/skills`
+- Any supported harness: ask Forge to initialize the current repository
 
-The plugin creates only the minimal `forge.yaml`, recomputes repository evidence for every evaluation, recommends only candidates returned from the selected marketplace, and requires developer selection plus final confirmation. APM owns dependency resolution, `apm.yml`, `apm.lock.yaml`, and deployment.
+The plugin creates only the minimal `forge.yaml`, recomputes repository
+evidence for every evaluation, and recommends only candidates returned from
+the repository's selected marketplace. You select the top-level packages and
+confirm before installation. APM owns dependencies, `apm.yml`, `apm.lock.yaml`,
+and deployment.
 
-## Contributing
+## Supported harnesses
 
-Use APM 0.26.x and validate only the preview targets currently claimed:
+The preview is integration-tested for:
 
-```sh
-uvx --from apm-cli==0.26.0 apm install --dry-run --target copilot,claude,codex --trust-transitive-mcp
-uvx --from apm-cli==0.26.0 apm pack
-pwsh ./tools/Validate-Repository.ps1
-```
+- Claude Code
+- Codex CLI
+- GitHub Copilot CLI
 
-See [AGENTS.md](./AGENTS.md), [docs/architecture.md](./docs/architecture.md), and the [Accepted ADRs](./docs/adr/README.md) before changing behavior.
+Other APM targets are not yet claimed as supported by Forge.
+
+## Project information
+
+- [Contributing and running from source](./CONTRIBUTING.md)
+- [Architecture](./docs/architecture.md)
+- [Security policy](./SECURITY.md)
+- [License](./LICENSE) — Apache License 2.0
+- [Trademarks](./TRADEMARKS.md) — Draigara name and brand usage

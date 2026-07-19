@@ -7,6 +7,6 @@
   },
   "repository": "https://github.com/draigara/draigara-forge-plugin",
   "homepage": "https://github.com/draigara/draigara-forge-plugin",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "keywords": ["apm", "agent-skills", "developer-tools"]
 }

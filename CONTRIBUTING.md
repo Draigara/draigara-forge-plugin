@@ -1,42 +1,51 @@
-# Contributing
+# Contributing to the Forge Plugin
+
+Contributions are welcome under the repository's
+[Apache License 2.0](./LICENSE). By submitting a contribution, you agree that
+it may be distributed under that license. Draigara names and logos remain
+subject to the separate [trademark notice](./TRADEMARKS.md).
 
 ## Before starting
 
 Read, in order:
 
-1. `README.md`
-2. `PRODUCT-CONTEXT.md`
-3. `AGENTS.md`
-4. `docs/architecture.md`
-5. `docs/implementation-plan.md`
-6. all Accepted ADRs relevant to the change
+1. [`README.md`](./README.md)
+2. [`PRODUCT-CONTEXT.md`](./PRODUCT-CONTEXT.md)
+3. [`AGENTS.md`](./AGENTS.md) when using a coding agent
+4. [`docs/architecture.md`](./docs/architecture.md)
+5. [`docs/implementation-plan.md`](./docs/implementation-plan.md)
+6. the [Accepted ADRs](./docs/adr/README.md) relevant to the change
 
-Do not begin with code when the change alters a cross-repository contract, security boundary, command semantics, package metadata interpretation, or user approval flow. Write or update an ADR first.
+Write or update an ADR before changing the Forge MCP contract, confirmation
+flow, package format, harness behavior, or another security boundary.
 
-## Development workflow
+## Run from source
 
-- Create a focused issue with acceptance criteria.
-- Use a short-lived branch.
-- Keep pull requests reviewable and preferably below 500 changed lines excluding generated files.
-- Add tests that fail before the fix and pass afterward.
-- Update user, operator, and protocol documentation in the same pull request.
-- Record compatibility impact.
-- Do not mix broad refactoring with behaviour changes.
+Install `uv`, PowerShell, and APM 0.26.x. Then run:
+
+```sh
+uvx --from apm-cli==0.26.0 apm install --dry-run --target copilot,claude,codex --trust-transitive-mcp
+uvx --from apm-cli==0.26.0 apm pack --dry-run --verbose
+```
+
+Validate repository contracts on Windows, macOS, or Linux with PowerShell 7:
+
+```powershell
+./tools/Validate-Repository.ps1
+```
+
+The package must remain a single global APM plugin with only the intentional
+Forge skill and `forge mcp` declaration. Do not add claims for another harness
+without its integration tests.
+
+## Contribution workflow
+
+- Keep pull requests focused and reviewable.
+- Add failing-first tests or fixtures for behavior changes.
+- Update MCP schemas and golden fixtures in the same change.
+- Treat repository and marketplace text as untrusted input.
+- Preserve developer selection and final confirmation.
 - Use conventional commits where practical.
 
-## Definition of done
-
-A change is complete when:
-
-- acceptance criteria are demonstrably satisfied;
-- unit, contract, integration, and security tests appropriate to the change pass;
-- user-facing errors are actionable;
-- logs avoid secrets and unnecessary repository content;
-- supported platforms are considered;
-- relevant schemas and fixtures are updated;
-- release notes are added when user-visible;
-- no TODO silently defers a required safety or compatibility property.
-
-## AI-assisted contributions
-
-AI-generated code is held to the same standard as human-written code. The contributor remains responsible for correctness, licensing, provenance, tests, and security. Coding agents must follow `AGENTS.md` and may not reinterpret product boundaries.
+AI-assisted contributions have the same correctness, provenance, licensing,
+testing, and security obligations as human-written work.

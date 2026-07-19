@@ -5,6 +5,8 @@ $errors = [System.Collections.Generic.List[string]]::new()
 foreach ($required in @(
     'apm.yml',
     'plugin.json',
+    'NOTICE',
+    'TRADEMARKS.md',
     '.mcp.json',
     '.apm/skills/forge/SKILL.md',
     'schemas/mcp/v1/forge-tools.schema.json',
@@ -31,6 +33,13 @@ if (
 
 $manifest = Get-Content -Raw -LiteralPath (Join-Path $root 'apm.yml')
 $plugin = Get-Content -Raw -LiteralPath (Join-Path $root 'plugin.json') | ConvertFrom-Json
+$license = Get-Content -Raw -LiteralPath (Join-Path $root 'LICENSE')
+if ($manifest -notmatch '(?m)^license: Apache-2\.0$' -or $plugin.license -ne 'Apache-2.0') {
+    $errors.Add('apm.yml and plugin.json must declare Apache-2.0')
+}
+if ($license -notmatch '^\s*Apache License\s+Version 2\.0, January 2004' -or $license -notmatch '7\. Disclaimer of Warranty\.' -or $license -notmatch '8\. Limitation of Liability\.') {
+    $errors.Add('LICENSE must contain the official Apache License 2.0 terms')
+}
 if ($manifest -notmatch '(?m)^version: 0\.1\.0-preview\.0$' -or $plugin.version -ne '0.1.0-preview.0') {
     $errors.Add('apm.yml and plugin.json must agree on the preview version')
 }

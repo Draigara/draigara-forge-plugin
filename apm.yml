@@ -3,7 +3,7 @@ version: 0.1.0-preview.0
 description: Repository-aware discovery and selection of APM marketplace packages through Draigara Forge.
 author:
   name: Draigara
-license: MIT
+license: Apache-2.0
 repository: https://github.com/draigara/draigara-forge-plugin
 homepage: https://github.com/draigara/draigara-forge-plugin
 keywords:
