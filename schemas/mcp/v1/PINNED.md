@@ -2,7 +2,7 @@
 
 Source repository: `draigara-forge-cli`
 
-Source commit: `0b69742fdba1e467b8c50c9af4cb8a41d34e92e4`
+Source commit: `90214209badbf6c1244ed14ec8d40aed075999cf`
 
 Contract: Forge MCP `1.0`
 
