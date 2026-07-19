@@ -40,7 +40,7 @@ if ($manifest -notmatch '(?m)^license: Apache-2\.0$' -or $plugin.license -ne 'Ap
 if ($license -notmatch '^\s*Apache License\s+Version 2\.0, January 2004' -or $license -notmatch '7\. Disclaimer of Warranty\.' -or $license -notmatch '8\. Limitation of Liability\.') {
     $errors.Add('LICENSE must contain the official Apache License 2.0 terms')
 }
-if ($manifest -notmatch '(?m)^version: 0\.1\.0-preview\.0$' -or $plugin.version -ne '0.1.0-preview.0') {
+if ($manifest -notmatch '(?m)^version: 0\.1\.0-preview\.1$' -or $plugin.version -ne '0.1.0-preview.1') {
     $errors.Add('apm.yml and plugin.json must agree on the preview version')
 }
 foreach ($required in @('name: draigara-forge', 'registry: false', 'transport: stdio', 'command: forge')) {
@@ -53,6 +53,23 @@ if ($manifest -match '(?m)^includes:\s+auto$' -or -not $manifest.Contains('  - .
 $schema = Get-Content -Raw -LiteralPath (Join-Path $root 'schemas/mcp/v1/forge-tools.schema.json') | ConvertFrom-Json
 if ($null -eq $schema.'$defs'.toolRequest -or $null -eq $schema.'$defs'.installation) {
     $errors.Add('MCP schema must define both requests and all result families')
+}
+
+$skill = Get-Content -Raw -LiteralPath (Join-Path $root '.apm/skills/forge/SKILL.md')
+foreach ($required in @(
+    'Keep repository paths, evaluation IDs, and candidate IDs internal',
+    'display name, a concise description, and the repository-grounded reason',
+    'Refer to the working directory as “this repository”',
+    'Do not print raw MCP JSON'
+)) {
+    if (-not $skill.Contains($required)) { $errors.Add("Forge skill is missing human-facing presentation guidance: $required") }
+}
+foreach ($forbidden in @(
+    'Recommend only opaque candidate IDs',
+    'selected top-level package IDs',
+    'Report only the structured result'
+)) {
+    if ($skill.Contains($forbidden)) { $errors.Add("Forge skill retains identifier-first presentation guidance: $forbidden") }
 }
 
 Get-ChildItem -LiteralPath (Join-Path $root 'fixtures/mcp/v1') -Filter '*.json' | ForEach-Object {

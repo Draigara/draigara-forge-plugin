@@ -37,7 +37,7 @@ Actions: Review details | Search marketplace | Select none | Continue
 - The selected list is echoed before confirmation.
 - The developer can install none and still receive an evaluation summary.
 - Search results remain tied to the configured marketplace.
-- Package IDs need not be exposed unless useful for disambiguation.
+- Opaque candidate IDs are never used as human-facing labels. The plugin carries them internally after the developer selects a package name.
 - Accessibility does not depend on colour.
 
 ## Fallback for non-interactive harnesses
@@ -68,7 +68,7 @@ Marketplace
   company-apm
 
 Repository
-  /workspace/example
+  This repository
 
 Targets
   Codex
@@ -78,4 +78,4 @@ APM will resolve dependencies and produce repository package state.
 Install these top-level packages? [yes/no]
 ```
 
-The final yes/no must occur after the complete top-level request is displayed. Apply accepts only opaque candidate IDs returned by the current evaluation.
+The final yes/no must occur after the complete top-level request is displayed. Apply accepts only opaque candidate IDs returned by the current evaluation, but those security bindings remain internal to the MCP call.

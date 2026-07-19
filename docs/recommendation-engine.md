@@ -53,7 +53,7 @@ The score is for ordering only. It is not a policy decision.
 
 ## Recommendation output
 
-For each presented candidate:
+The MCP record keeps its opaque binding for apply:
 
 ```json
 {
@@ -68,6 +68,8 @@ For each presented candidate:
 ```
 
 Confidence labels are preferred over deceptive numeric precision.
+
+The developer-facing view does not print `candidateId`. It shows the returned package name and description followed by the grounded reason, evidence, and uncertainty. Harness-native selectors use those names as labels and carry the matching candidate IDs only as internal values.
 
 ## Minimality
 
